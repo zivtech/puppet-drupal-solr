@@ -10,8 +10,8 @@ if [ ! -d /opt/solr/solr-$1 ] ; then
   exit
 fi
 sudo /etc/init.d/tomcat6 stop
-sudo rm -r /opt/solr/solr-$1
-sudo rm "/etc/tomcat6/Catalina/localhost/solr-$1.xml"
-sudo rm -rf "/var/lib/tomcat6/webapps/solr-$1"
+rm -r /opt/solr/solr-$1
+rm "/etc/tomcat6/Catalina/localhost/solr-$1.xml"
+rm -rf "/var/lib/tomcat6/webapps/solr-$1"
 sudo /etc/init.d/tomcat6 start
 

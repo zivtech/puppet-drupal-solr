@@ -68,6 +68,18 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root') {
     group => 'root',
     mode => 755,
   }
+
+  file { '/etc/tomcat6/Catalina/localhost':
+    ensure => directory,
+    owner => root,
+    group => $webadmingroup,
+  }
+
+  file { '/var/lib/tomcat6/webapps':
+    ensure => directory,
+    owner => $tomcatuser,
+    group => $webadmingroup,
+  }
 }
 
 
