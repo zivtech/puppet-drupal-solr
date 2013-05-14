@@ -73,6 +73,9 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root') {
     ensure => directory,
     owner => root,
     group => $webadmingroup,
+    require => [
+      Package['tomcat6'],
+    ],
   }
 
   file { '/var/lib/tomcat6/webapps':
