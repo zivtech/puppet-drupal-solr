@@ -52,7 +52,7 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root') {
     source => "https://github.com/zivtech/Solr-base.git",
     ensure => "present",
     provider => 'git',
-    revision => '53913dba63da3b347247e42673654dedaea51c9c',
+    revision => '80e7f0e343f47364ee707dc10ef3b8994784bd7c',
   }
 
   file { '/usr/local/bin/create-solr-instance':
