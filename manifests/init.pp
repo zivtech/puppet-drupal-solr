@@ -41,7 +41,7 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root') {
     ensure => present,
     provider => 'git',
     source => "https://github.com/zivtech/Solr-base.git",
-    revision => '39f368c7b5faf70748a2264b4d5c21cb6c3a86f4',
+    revision => '072b12bd14e6029531609b8a81b3beab35f0b9e7',
   }
 
   vcsrepo { "/opt/solr/sapi-solrbase-7":
@@ -52,7 +52,7 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root') {
     source => "https://github.com/zivtech/Solr-base.git",
     ensure => "present",
     provider => 'git',
-    revision => '1103a8d4aa2fd7f290ac0fdcf2d5165d16293b2e',
+    revision => '53913dba63da3b347247e42673654dedaea51c9c',
   }
 
   file { '/usr/local/bin/create-solr-instance':
