@@ -1,4 +1,4 @@
-name    'zivtech-drupal-solr'
+name    'zivtech/drupal_solr'
 version '0.0.1'
 source 'https://github.com/zivtech/puppet-drupal-solr.git'
 author 'zivtech'
