@@ -1,0 +1,10 @@
+name    'zivtech-drupal-solr'
+version '0.0.1'
+source 'https://github.com/zivtech/puppet-drupal-solr.git'
+author 'zivtech'
+license 'GPL2+'
+summary 'Puppet module to provide '
+description 'A Puppet module to install and execute Drupal commands using Drush.'
+project_page 'https://github.com/zivtech/puppet-drupal-solr'
+
+dependency 'puppetlabs/vcsrepo'
