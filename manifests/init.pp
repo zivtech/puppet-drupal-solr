@@ -1,4 +1,4 @@
-class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root') {
+class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service = true) {
 
   package {
     [
@@ -8,9 +8,11 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root') {
       ensure => installed
   }
 
-  service { 'tomcat6':
-    require => Package['tomcat6'],
-    ensure => running,
+  if ($manage_service) {
+    service { 'tomcat6':
+      require => Package['tomcat6'],
+      ensure => running,
+    }
   }
 
   file { "/opt/solr":
