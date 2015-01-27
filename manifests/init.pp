@@ -19,8 +19,10 @@ class drupal_solr (
       subscribe => [
         File['/etc/tomcat6/Catalina/localhost'],
         File['/var/lib/tomcat6/webapps'],
-      ]
+      ],
     }
+    -> File['/usr/local/bin/create-solr-instance']
+    -> File['/usr/local/bin/remove-solr-instance']
   }
 
   file { "/opt/solr":
