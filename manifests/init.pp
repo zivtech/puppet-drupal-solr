@@ -16,6 +16,10 @@ class drupal_solr (
     service { 'tomcat6':
       require => Package['tomcat6'],
       ensure => running,
+      subscribe => [
+        File['/etc/tomcat6/Catalina/localhost'],
+        File['/var/lib/tomcat6/webapps'],
+      ]
     }
   }
 
@@ -66,6 +70,11 @@ class drupal_solr (
     owner => 'root',
     group => 'root',
     mode => 755,
+    require => [
+      Vcsrepo["/opt/solr/solrbase-6"],
+      Vcsrepo["/opt/solr/solrbase-7"],
+      Vcsrepo["/opt/solr/sapi-solrbase-7"],
+    ],
   }
 
   file { '/usr/local/bin/remove-solr-instance':
@@ -73,6 +82,11 @@ class drupal_solr (
     owner => 'root',
     group => 'root',
     mode => 755,
+    require => [
+      Vcsrepo["/opt/solr/solrbase-6"],
+      Vcsrepo["/opt/solr/solrbase-7"],
+      Vcsrepo["/opt/solr/sapi-solrbase-7"],
+    ],
   }
 
   file { '/etc/tomcat6/Catalina/localhost':
