@@ -1,4 +1,8 @@
-class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service = true) {
+class drupal_solr (
+  $tomcatuser = 'tomcat6',
+  $webadmingroup = 'root',
+  $manage_service = true,
+) {
 
   package {
     [
@@ -58,14 +62,14 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service =
   }
 
   file { '/usr/local/bin/create-solr-instance':
-    source => "puppet:///modules/solr/create-solr-instance",
+    source => "puppet:///modules/drupal_solr/create-solr-instance",
     owner => 'root',
     group => 'root',
     mode => 755,
   }
 
   file { '/usr/local/bin/remove-solr-instance':
-    source => "puppet:///modules/solr/remove-solr-instance",
+    source => "puppet:///modules/drupal_solr/remove-solr-instance",
     owner => 'root',
     group => 'root',
     mode => 755,
@@ -86,6 +90,3 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service =
     group => $webadmingroup,
   }
 }
-
-
-
