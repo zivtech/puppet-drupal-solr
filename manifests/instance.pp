@@ -9,8 +9,15 @@ define drupal_solr::instance(
       if $sapi {
         fail("\$sapi only supported with Drupal 7.")
       }
+      include drupal_solr::solrbase6
     }
-    7: {}
+    7: {
+      case $sapi {
+        true: { include drupal_solr::solrbase7_sapi }
+        false: { include drupal_solr::solrbase7 }
+        default: { fail("Invalid value for \$sapi: must be a boolean.") }
+      }
+    }
     default: { fail("Invalid Drupal version ${version} detected. Only 6 and 7 supported.") }
   }
 
@@ -19,7 +26,6 @@ define drupal_solr::instance(
       case $sapi {
         true: { $command = "create-solr-instance ${name} ${version} sapi" }
         false: { $command = "create-solr-instance ${name} ${version}" }
-        default: { fail("Invalid value for \$sapi: must be a boolean.") }
       }
 
       exec { $command:
