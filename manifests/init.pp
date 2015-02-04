@@ -15,6 +15,16 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service =
     }
   }
 
+  logrotate::rule { 'tomcat':
+    path         => '/var/log/tomcat/catalina.out',
+    copytruncate => true,
+    rotate_every => 'day',
+    rotate       => 5,
+    compress     => true,
+    missingok    => true,
+    size         => '10M'
+  }
+
   file { "/opt/solr":
     require => Package['tomcat6'],
     ensure => directory,
