@@ -27,7 +27,7 @@ Just run `puppet module install zivtech/drupal_solr`.
 ## Dependencies
 
 This module relies on
- [puppetlabs/vcsrepo](https://forge.puppetlabs.com/puppetlabs/vcsrepo).
+ [puppetlabs/vcsrepo](https://forge.puppetlabs.com/puppetlabs/vcsrepo) and [rodjek/logrotate](https://github.com/rodjek/puppet-logrotate).
 
 ## Using the setup once installed
 
