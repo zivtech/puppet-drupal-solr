@@ -12,16 +12,16 @@ Just run `puppet module install zivtech/drupal_solr`.
 ## Basic usage
 
 ```` puppet
-    include solr
+include solr
 ````
 
 ## Advanced usage
 
 ```` puppet
-    class { 'solr':
-      tomcatuser => 'tomcat6',
-      webadmingroup => 'some_website_admin_group',
-    }
+class { 'solr':
+  user => 'tomcat6',
+  group => 'some_website_admin_group',
+}
 ````
 
 ## Dependencies
@@ -38,7 +38,7 @@ and managed by tomcat.  Once you use this module to install solr you can create
 specific instances like so:
 
 ```` bash
-    create-solr-instance mysite 7 sapi
+create-solr-instance mysite 7 sapi
 ````
 
 This will create a solr instance with the
@@ -51,6 +51,6 @@ You can remove the solr instance from tomcat and delete all data inside the inde
 with the following command:
 
 ```` bash
-    remove-solr-instance mysite
+remove-solr-instance mysite
 ````
 

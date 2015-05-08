@@ -1,11 +1,18 @@
-class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service = true) {
+class solr (
+  $user = 'tomcat6',
+  $group = 'root',
+  $manage_service = true,
+  $solr_drupal_6_ref = '04117b5d52391eea48b5f8aa71d3b88ca788e9f1',
+  $solr_drupal_7_ref = '072b12bd14e6029531609b8a81b3beab35f0b9e7',
+  $solr_drupal_7_sapi_ref = '80e7f0e343f47364ee707dc10ef3b8994784bd7c'
+) {
 
-  package {
-    [
-      'tomcat6',
-      'tomcat6-admin',
-    ]:
-      ensure => installed
+  package { 'tomcat6':
+    ensure => installed
+  }
+
+  package { 'tomcat6-admin':
+    ensure => installed
   }
 
   if ($manage_service) {
@@ -28,9 +35,8 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service =
   file { "/opt/solr":
     require => Package['tomcat6'],
     ensure => directory,
-    owner => $tomcatuser,
-    group => $webadmingroup,
-    recurse => true,
+    owner => $user,
+    group => $group,
     mode => 775,
   }
 
@@ -42,7 +48,9 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service =
     ensure => present,
     provider => 'git',
     source => "https://github.com/zivtech/Solr-base.git",
-    revision => '04117b5d52391eea48b5f8aa71d3b88ca788e9f1',
+    revision => $solr_drupal_6_ref,
+    owner => $user,
+    group => $group,
   }
 
   vcsrepo { "/opt/solr/solrbase-7":
@@ -53,7 +61,9 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service =
     ensure => present,
     provider => 'git',
     source => "https://github.com/zivtech/Solr-base.git",
-    revision => '072b12bd14e6029531609b8a81b3beab35f0b9e7',
+    revision => $solr_drupal_7_ref,
+    owner => $user,
+    group => $group,
   }
 
   vcsrepo { "/opt/solr/sapi-solrbase-7":
@@ -64,7 +74,9 @@ class solr ( $tomcatuser = 'tomcat6', $webadmingroup = 'root', $manage_service =
     source => "https://github.com/zivtech/Solr-base.git",
     ensure => "present",
     provider => 'git',
-    revision => '80e7f0e343f47364ee707dc10ef3b8994784bd7c',
+    revision => $solr_drupal_7_sapi_ref,
+    owner => $user,
+    group => $group,
   }
 
   file { '/usr/local/bin/create-solr-instance':
