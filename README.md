@@ -12,13 +12,13 @@ Just run `puppet module install zivtech/drupal_solr`.
 ## Basic usage
 
 ```` puppet
-include solr
+include drupal_solr
 ````
 
 ## Advanced usage
 
 ```` puppet
-class { 'solr':
+class { 'drupal_solr':
   user => 'tomcat6',
   group => 'some_website_admin_group',
 }

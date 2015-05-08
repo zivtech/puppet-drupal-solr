@@ -1,4 +1,4 @@
-class solr (
+class drupal_solr (
   $user = 'tomcat6',
   $group = 'root',
   $manage_service = true,
