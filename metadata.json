@@ -8,6 +8,6 @@
   "project_page": "https://github.com/zivtech/puppet-drupal-solr",
   "issues_url": "https://github.com/zivtech/puppet-drupal-solr/issues",
   "dependencies": [
-    {"name":"rodjek-logrotate","version_requirement":">= 0.0.0"}
+    {"name":"yo61/logrotate","version_requirement":">= 0.0.0"}
   ]
 }
