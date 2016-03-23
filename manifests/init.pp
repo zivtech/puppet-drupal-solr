@@ -80,17 +80,17 @@ class drupal_solr (
   }
 
   file { '/usr/local/bin/create-solr-instance':
-    source => 'puppet:///modules/solr/create-solr-instance',
+    source => "puppet:///modules/${module_name}/create-solr-instance",
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
   }
 
   file { '/usr/local/bin/remove-solr-instance':
-    source => 'puppet:///modules/solr/remove-solr-instance',
+    source => "puppet:///modules/${module_name}/remove-solr-instance",
     owner  => 'root',
     group  => 'root',
-    mode  => '0755',
+    mode   => '0755',
   }
 
   file { '/etc/tomcat6/Catalina/localhost':
