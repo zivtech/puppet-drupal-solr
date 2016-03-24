@@ -8,17 +8,17 @@ class drupal_solr (
 ) {
 
   package { 'tomcat6':
-    ensure => installed
+    ensure => 'installed'
   }
 
   package { 'tomcat6-admin':
-    ensure => installed
+    ensure => 'installed'
   }
 
   if ($manage_service) {
     service { 'tomcat6':
       require => Package['tomcat6'],
-      ensure => running,
+      ensure  => 'running',
     }
   }
 
@@ -32,80 +32,80 @@ class drupal_solr (
     size         => '10M'
   }
 
-  file { "/opt/solr":
+  file { '/opt/solr':
     require => Package['tomcat6'],
-    ensure => directory,
-    owner => $user,
-    group => $group,
-    mode => 775,
+    ensure  => 'directory',
+    owner   => $user,
+    group   => $group,
+    mode    => '0775',
   }
 
-  vcsrepo { "/opt/solr/solrbase-6":
-    require => [
+  vcsrepo { '/opt/solr/solrbase-6':
+    ensure   => present,
+    provider => 'git',
+    source   => 'https://github.com/zivtech/Solr-base.git',
+    revision => $solr_drupal_6_ref,
+    owner    => $user,
+    group    => $group,
+    require  => [
       File['/opt/solr'],
       Package['tomcat6'],
     ],
-    ensure => present,
-    provider => 'git',
-    source => "https://github.com/zivtech/Solr-base.git",
-    revision => $solr_drupal_6_ref,
-    owner => $user,
-    group => $group,
   }
 
-  vcsrepo { "/opt/solr/solrbase-7":
-    require => [
-      File['/opt/solr'],
-      Package['tomcat6']
-    ],
-    ensure => present,
+  vcsrepo { '/opt/solr/solrbase-7':
+    ensure   => 'present',
     provider => 'git',
-    source => "https://github.com/zivtech/Solr-base.git",
+    source   => 'https://github.com/zivtech/Solr-base.git',
     revision => $solr_drupal_7_ref,
-    owner => $user,
-    group => $group,
-  }
-
-  vcsrepo { "/opt/solr/sapi-solrbase-7":
-    require => [
+    owner    => $user,
+    group    => $group,
+    require  => [
       File['/opt/solr'],
       Package['tomcat6']
     ],
-    source => "https://github.com/zivtech/Solr-base.git",
-    ensure => "present",
+  }
+
+  vcsrepo { '/opt/solr/sapi-solrbase-7':
+    source   => 'https://github.com/zivtech/Solr-base.git',
+    ensure   => 'present',
     provider => 'git',
     revision => $solr_drupal_7_sapi_ref,
-    owner => $user,
-    group => $group,
+    owner    => $user,
+    group    => $group,
+    require  => [
+      File['/opt/solr'],
+      Package['tomcat6']
+    ],
   }
 
   file { '/usr/local/bin/create-solr-instance':
-    source => "puppet:///modules/solr/create-solr-instance",
-    owner => 'root',
-    group => 'root',
-    mode => 755,
+    source => "puppet:///modules/${module_name}/create-solr-instance",
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
   }
 
   file { '/usr/local/bin/remove-solr-instance':
-    source => "puppet:///modules/solr/remove-solr-instance",
-    owner => 'root',
-    group => 'root',
-    mode => 755,
+    source => "puppet:///modules/${module_name}/remove-solr-instance",
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
   }
 
   file { '/etc/tomcat6/Catalina/localhost':
-    ensure => directory,
-    owner => root,
-    group => $webadmingroup,
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => $webadmingroup,
     require => [
       Package['tomcat6'],
     ],
   }
 
   file { '/var/lib/tomcat6/webapps':
-    ensure => directory,
-    owner => $tomcatuser,
-    group => $webadmingroup,
+    ensure => 'directory',
+    owner  => $tomcatuser,
+    group  => $webadmingroup,
   }
 }
 
