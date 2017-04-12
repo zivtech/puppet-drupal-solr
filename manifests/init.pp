@@ -33,21 +33,6 @@ class drupal_solr (
     group  => 'root',
     mode   => '0755',
   }
-
-  file { '/etc/tomcat6/Catalina/localhost':
-    ensure  => 'directory',
-    owner   => 'root',
-    group   => $webadmingroup,
-    require => [
-      Package['tomcat6'],
-    ],
-  }
-
-  file { '/var/lib/tomcat6/webapps':
-    ensure => 'directory',
-    owner  => $tomcatuser,
-    group  => $webadmingroup,
-  }
 }
 
 

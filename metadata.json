@@ -1,6 +1,6 @@
 {
   "name": "zivtech-drupal_solr",
-  "version": "3.0.0-beta",
+  "version": "3.0.0",
   "author": "zivtech",
   "summary": "A module for installing Solr for Drupal.",
   "license": "Apache 2.0",
