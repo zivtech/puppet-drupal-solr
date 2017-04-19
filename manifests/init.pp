@@ -2,14 +2,23 @@ class drupal_solr (
   $manage_service = true,
 ) {
 
-  include java
-  class { "zivtech_apt": }->
+  class { 'zivtech_apt': }
 
-  # TODO: Remove once the package is updated with this dependency.
-  package { 'openjdk-8-jre': }->
-  package { 'solr':
-    ensure => 'present',
+  package { 'openjdk-8-jre': }
+
+  exec { 'solr-apt-update':
+    command     => '/usr/bin/apt update',
+    refreshonly => true,
   }
+
+  package { 'solr':
+    ensure  => 'present',
+    require => [
+      Package['openjdk-8-jre'],
+    ],
+  }
+
+  Class['zivtech_apt']~>Exec['solr-apt-update']->Package['solr']
 
   if ($manage_service) {
     service { 'solr':
