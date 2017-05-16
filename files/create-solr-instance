@@ -5,7 +5,7 @@ set -e
 if [ ! $1 ] ; then
   echo >&2 "You did not specify a name for this solr core."
   echo >&2 ""
-  echo >&2 "We suggest using the name of your webiste."
+  echo >&2 "We suggest using the name of your website."
   echo >&2 ""
   echo >&2 "Usage: create-solr-instance [core name] [config directory]"
   exit 1
@@ -26,3 +26,4 @@ fi
 
 sudo -u solr -- /opt/solr/bin/solr create -c "$NAME" -d "$CONF"
 echo "A solr core called $NAME has been added with configuration $CONF has been added"
+echo "Connect to it at localhost:8983/solr/$NAME"
