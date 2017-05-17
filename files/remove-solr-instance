@@ -5,8 +5,6 @@ set -e
 if [ ! $1 ] ; then
   echo >&2 "You did not specify a name for the solr core to remove."
   echo >&2 ""
-  echo >&2 "We suggest using the name of your webiste."
-  echo >&2 ""
   echo >&2 "Usage: remove-solr-instance [core name]"
   exit 1
 fi
