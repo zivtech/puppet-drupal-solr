@@ -13,5 +13,5 @@ fi
 
 NAME=$1
 
-sudo -u solr -- /opt/solr/bin/solr create -c "$NAME"
+sudo -u solr -- /opt/solr/bin/solr delete -c "$NAME"
 echo "A solr core called $NAME has removed"
