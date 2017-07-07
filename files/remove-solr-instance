@@ -1,17 +1,15 @@
 #! /usr/bin/env bash
 
+set -e
+
 if [ ! $1 ] ; then
-  echo "Please specify a name for this instance."
-  exit
+  echo >&2 "You did not specify a name for the solr core to remove."
+  echo >&2 ""
+  echo >&2 "Usage: remove-solr-instance [core name]"
+  exit 1
 fi
 
-if [ ! -d /opt/solr/solr-$1 ] ; then
-  echo "That solr instance does not exist."
-  exit
-fi
-sudo /etc/init.d/tomcat6 stop
-rm -r /opt/solr/solr-$1
-rm "/etc/tomcat6/Catalina/localhost/solr-$1.xml"
-rm -rf "/var/lib/tomcat6/webapps/solr-$1"
-sudo /etc/init.d/tomcat6 start
+NAME=$1
 
+sudo -u solr -- /opt/solr/bin/solr delete -c "$NAME"
+echo "A solr core called $NAME has been removed"
