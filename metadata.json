@@ -7,7 +7,5 @@
   "source": "https://github.com/zivtech/puppet-drupal-solr.git",
   "project_page": "https://github.com/zivtech/puppet-drupal-solr",
   "issues_url": "https://github.com/zivtech/puppet-drupal-solr/issues",
-  "dependencies": [
-    {"name":"zivtech-zivtech_apt","version_requirement":">= 0.0.0"}
-  ]
+  "dependencies": []
 }
